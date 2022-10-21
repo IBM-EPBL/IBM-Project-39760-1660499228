@@ -1,10 +1,9 @@
-from email.mime import image
 from flask import Flask, render_template, request, redirect, url_for, session
 import ibm_db
 import re 
 app = Flask(__name__)
 
-conn=ibm_db.connect("DATABASE=bludb;HOSTNAME=19af6446-6171-4641-8aba-9dcff8e1b6ff.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=30699;PROTOCOL=TCPIP;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=qcm67666;PWD=KxZrIHflAZb39b05;","","")
+conn=ibm_db.connect("DATABASE=bludb;HOSTNAME=b70af05b-76e4-4bca-a1f5-23dbb4c6a74e.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=32716;SECURITY=SSL;SSLServercertificate=DigiCertGlobalRootCA.crt;PROTOCOL=TCPIP;UID=mgb08180;PWD=Rw9HkOun2nVKLC5s;", "", "")
 
 @app.route('/')
 @app.route('/login', methods =['GET', 'POST'])
@@ -13,7 +12,7 @@ def login():
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         username = request.form['email']
         password = request.form['password']
-        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM SATHISH_DB WHERE email = % s AND password = % s', (email, password, ))
+        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM POONGODI_DB WHERE email = % s AND password = % s', (email, password, ))
         account = ibm_db.fetch_both(stmt)
         if username==password:
             session['loggedin'] = True
@@ -34,8 +33,8 @@ def register():
         password = request.form['password']
         cpassword = request.form['cpassword']
         email = request.form['email']
-        conn=ibm_db.connect("DATABASE=bludb;HOSTNAME=19af6446-6171-4641-8aba-9dcff8e1b6ff.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=30699;PROTOCOL=TCPIP;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=qcm67666;PWD=KxZrIHflAZb39b05;","","")
-        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM SATHISH_DB')
+        conn=ibm_db.connect("DATABASE=bludb;HOSTNAME=b70af05b-76e4-4bca-a1f5-23dbb4c6a74e.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=32716;SECURITY=SSL;SSLServercertificate=DigiCertGlobalRootCA.crt;PROTOCOL=TCPIP;UID=mgb08180;PWD=Rw9HkOun2nVKLC5s;", "", "")
+        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM POONGODI_DB')
         if email==cpassword:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -45,7 +44,7 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form !'
         else:
-            sql=ibm_db.exec_immediate(conn,'INSERT INTO SATHISH_DB (roll_no, username, email, password, cpassword) VALUES (%s, % s, % s, % s)')
+            sql=ibm_db.exec_immediate(conn,'INSERT INTO POONGODI_DB (roll_no, username, email, password, cpassword) VALUES (%s, % s, % s, % s)')
             msg = 'You have successfully registered !'
             print("you have successfully registered!")
             return redirect(url('/login'))
