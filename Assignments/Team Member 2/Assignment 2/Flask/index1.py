@@ -13,7 +13,7 @@ def login():
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         username = request.form['email']
         password = request.form['password']
-        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM SATHISH_DB WHERE email = % s AND password = % s', (email, password, ))
+        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM SANGEETHA_DB WHERE email = % s AND password = % s', (email, password, ))
         account = ibm_db.fetch_both(stmt)
         if username==password:
             session['loggedin'] = True
@@ -35,7 +35,7 @@ def register():
         cpassword = request.form['cpassword']
         email = request.form['email']
         conn=ibm_db.connect("DATABASE=bludb;HOSTNAME=b0aebb68-94fa-46ec-a1fc-1c999edb6187.c3n41cmd0nqnrk39u98g.databases.appdomain.cloud;PORT=31249;PROTOCOL=TCPIP;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=wml89493;PWD=FMiTW8w27vP4G70x;","","")
-        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM SATHISH_DB')
+        stmt = ibm_db.exec_immediate(conn,'SELECT * FROM SANGEETHA_DB')
         if email==cpassword:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -45,7 +45,7 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form !'
         else:
-            sql=ibm_db.exec_immediate(conn,'INSERT INTO SATHISH_DB (roll_no, username, email, password, cpassword) VALUES (%s, % s, % s, % s)')
+            sql=ibm_db.exec_immediate(conn,'INSERT INTO SANGEETHA_DB (roll_no, username, email, password, cpassword) VALUES (%s, % s, % s, % s)')
             msg = 'You have successfully registered !'
             print("you have successfully registered!")
             return redirect(url('/login'))
