@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Smart Fashion Recommender</title>
+        <link rel="stylesheet" href="fashion.css">
+    </head>
+     
+    <h1><marquee><i></i><b>SMART FASHION RECOMMENDER</i></b></marquee></h1>
+    <body>
+<script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "34e35886-0fb9-4afa-a417-351b51d587e8", // The ID of this integration.
+      region: "au-syd", // The region your integration is hosted in.
+      serviceInstanceID: "7eadfc17-89bb-4e43-8d1f-09fc972be75a", // The ID of your service instance.
+      onLoad: function(instance) { instance.render(); }
+    };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    });
+  </script>
+  </body>
+  </html>
