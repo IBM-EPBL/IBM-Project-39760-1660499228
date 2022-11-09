@@ -2,7 +2,7 @@
 Smart Fashion Recommender Application
 
 **TEAM MEMBERS :**
-  SATHISH KUMAR D,
+  SATHISH KUMAR D,<br>
   POONGODI S,
   SANGEETHA K,
   PRAVEEN S.
